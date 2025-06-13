@@ -70,3 +70,22 @@ enter
 
 systemctl restart sshd.service
 ```
+!!! Обязательно проверяем, в том числе на правильность паролей.
+
+### Между офисами HQ и BR необходимо сконфигурировать ip туннель
+Перед настройкой: проверяем отключен ли на всех роутерах firewall, если нет - отключаем. Включаем на всех роутерах ip forwarding.
+
+```
+nano /etc/net/sysctl.conf
+net.ipv4.ip_forward = 1
+```
+
+Настраиваем GRE через nmtui
+
+HQ-RTR:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/isp.png">
+
+BR-RTR:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/isp.png">
