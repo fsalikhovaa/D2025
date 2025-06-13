@@ -23,3 +23,50 @@ hostnamectl set-hostname имя_устройства; exec bash
 | HQ-CLI | 172.16.0.3/28 | 172.16.0.1 |
 
 !!! Заносим в отчет необходимые данные. Проверяем сетевую связанность с помощью ping.
+
+### Создание локальных учетных записей 
+На серверах HQ-SRV и BR-SRV: пользователь sshuser, пароль P@ssw0rd, id 1010
+
+```
+useradd -m -u 1010 sshuser
+passwd sshuser
+nano /etc/sudoers
+sshuser ALL=(ALL:ALL)NOPASSWD:ALL
+ctrl+x
+y
+enter
+usermod -aG wheel sshuser
+```
+
+На роутерах HQ-RTR и BR-RTR: пользователь net_admin, пароль P@$$word
+
+```
+useradd -m net_admin
+passwd net_admin
+nano /etc/sudoers
+net_admin ALL=(ALL:ALL)NOPASSWD:ALL
+ctrl+x
+y
+enter
+usermod -aG wheel net_admin
+```
+
+### Настройка безопасного удаленного доступа на серверах HQ-SRV и BR-SRV:
+```
+nano /etc/mybanner
+в файл: Authorized access only!
+ctrl+x
+y
+enter
+
+nano /etc/openssh/sshd_config
+port 2024
+Banner /etc/mybanner
+MaxAuthTries 2
+AllowUsers sshuser
+ctrl+x
+y
+enter
+
+systemctl restart sshd.service
+```
