@@ -231,7 +231,7 @@ timedatectl set-timezone Europe/Moscow
 
 # Модуль 2 
 
-[назад](##ОГЛАВЛЕНИЕ)
+[назад](#ОГЛАВЛЕНИЕ)
 ### 9. Настройте доменный контроллер Samba на машине HQ-SRV
 
 
@@ -240,4 +240,4 @@ timedatectl set-timezone Europe/Moscow
 
 # Модуль 3 
 
-[назад](##ОГЛАВЛЕНИЕ)
+[назад](#ОГЛАВЛЕНИЕ)
