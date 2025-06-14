@@ -423,7 +423,7 @@ touch /mnt/nfs/TEST
 ls –l  /root/raid5/nfs
 ```
 
-###  Сконфигурируйте ansible на сервере BR-SRV :
+### 11. Сконфигурируйте ansible на сервере BR-SRV :
 
 Заходим в файл /etc/ansible/hosts и заносим данные о хостах:
 
