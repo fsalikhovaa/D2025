@@ -546,7 +546,7 @@ nano /etc/crontab
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229673.jpg"/>
 
-### Реализуйте механизм инвентаризации машин HQ-SRV и HQ-CLI через Ansible на BR-SRV
+### 13. Реализуйте механизм инвентаризации машин HQ-SRV и HQ-CLI через Ansible на BR-SRV
 
 ```
 mkdir /etc/ansible/PC_INFO
