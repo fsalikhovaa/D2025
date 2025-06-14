@@ -504,3 +504,44 @@ nano /etc/rsyslog.d/00_common.conf
 
 Раскоменчиваем первые 4 модуля, которые начнут собирать логи:
 
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/рсислог%20клиент.png"/>
+
+```
+systemctl enable --now rsyslog
+```
+
+Проверям наличие логов: 
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/логи%20в%20опт.png"/>
+
+### Ротация логов
+
+Создайте /etc/logrotate.d/rsyslog:
+
+```
+nano /etc/logrotate.d/rsyslog
+
+/opt/*.log {
+    weekly
+    size 10M
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root root
+    sharedskripts
+    postrotate
+        /usr/bin/systemctl reload rsyslog > /dev/null 2>&1 || true
+    endscript
+}
+```
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229674.jpg"/>
+
+```
+nano /etc/crontab
+
+0 0 * * 0 /usr/sbin/logrotate -f /etc/logrotate.d/rsyslog
+```
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229673.jpg"/>
