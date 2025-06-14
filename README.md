@@ -233,10 +233,106 @@ timedatectl set-timezone Europe/Moscow
 
 [назад](#ОГЛАВЛЕНИЕ)
 ### 9. Настройте доменный контроллер Samba на машине HQ-SRV
+Перед началом настройки отключаем все мосты, если они есть и лишние интерфейсы.
+
+```
+control bind-chroot disabled
+grep -q 'bind-dns' /etc/bind/named.conf || echo 'include "/var/lib/samba/bind-dns/named.conf";' >> /etc/bind/named.conf
+nano /etc/bind/options.conf
+```
+
+Вносим в файл следующие строки:
+
+```
+tkey-gssapi-keytab "/var/lib/samba/bind-dns/dns.keytab";
+minimal-responses yes;
+
+category lame-servers {null;};
+```
+
+как на фото:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/options.png"/>
+
+```
+systemctl stop bind
+nano /etc/sysconfig/network
+```
+
+Прописываем хостнейм: HQ-SRV.au-team.irpo
+
+```
+domainname au-team.irpo
+rm -f /etc/samba/smb.conf
+rm -rf /var/lib/samba
+rm -rf /var/cache/samba
+mkdir -p /var/lib/samba/sysvol
+```
+
+Проверяем есть ли необходимые записи в /etc/resolv.conf. Если нет вносим согласно картинке:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/5285432947287127148.jpg"/>
 
 
+```
+samba-tool domain provision
+```
 
+Вносим данные по требованию: BIND9_DLZ, P@ssw0rd
 
+```
+nano /etc/bind/named.conf
+```
+
+Комментируем строку как на фото:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425229.jpg"/>
+
+```
+systemctl enable --now samba
+systemctl enable --now bind
+cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+nano /etc/krb5.conf
+```
+
+Проверяем на наличие необходимых записей как на фото:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/5285432947287127149.jpg"/>
+
+Проверка:
+
+```
+samba-tool domain info 127.0.0.1
+host -t SRV _kerberos._udp.au-team.irpo.
+host -t SRV _ldap._tcp.au-team.irpo.
+host -t A hq-srv.au-team.irpo
+```
+
+```
+kinit administrator@AU-TEM.IRPO
+```
+
+На приглашение ввода пароля пишем: P@ssw0rd
+
+Ввод машны в домен. Перед вводом указываем в параметрах сети адрес днс: 172.16.0.2 и поисковой домен: au-team.irpo
+
+На HQ-CLI:
+
+```
+kinit administrator@AU-TEM.IRPO
+acc
+Аутентификация
+```
+Далее как на фото, не забывая галочки:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425247.jpg"/>
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425257.jpg"/>
+
+Для создания пользователей: в открывшимся окне разворачиваем au-team.irpo, открываем вкладку users и создаем пользователей. Имена пользователей формата user№.hq
+
+```
+admc
+```
 
 # Модуль 3 
 
