@@ -582,3 +582,4 @@ nano playbook.yml
 ```
 ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 ```
+# Добавить хрони
