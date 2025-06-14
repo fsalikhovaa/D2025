@@ -334,6 +334,92 @@ acc
 admc
 ```
 
+### 10. Сконфигурируйте файловое хранилище: 
+
+Проверяем наличие дисков: 
+
+```
+lsblk
+```
+
+Создание RAID:
+
+```
+mdadm --create --level=5 --raid-devices=3 /dev/md0 /dev/sdb /dev/sdc /dev/sdd
+mkdir /etc/mdadm
+echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+cat /etc/mdadm/mdadm.conf
+mkfs.ext4 /dev/md0
+```
+
+Чтобы данный раздел также монтировался при загрузке системы, добавляем в fstab.
+
+```
+nano /etc/fstab
+mkdir /root/raid5
+
+/dev/md0        /root/raid5 ext4        defaults        0        0
+
+mount –a
+df –h
+```
+
+## Настройка nfs:
+Создаём директорию для общего доступа в директории /root/raid5, куда ранее был смонтирован RAID
+
+```
+mkdir /root/raid5/nfs
+chmod 777 /root/raid5/nfs
+```
+
+Производим конфигурацию NFS. В файл /etc/exports вносим строку:
+
+```
+/root/raid5/nfs 172.16.0.0/26(rw,subtree_check,no_root_squash)
+```
+
+как на фото:
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/Рисунок2.png"/>
+
+Экспортируем файловую систему, указанную выше в /etc/exports
+
+```
+exportfs –arv
+systemctl enable --now nfs-server
+```
+
+Продолжаем на HQ-CLI:
+
+Создадим директорию для монтирования общего ресурса:
+
+```
+mkdir /mnt/nfs
+chmod 777 /mnt/nfs
+```
+Настраиваем автомонтирование общего ресурса через fstab:
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/автомонтирование%20через%20fstab.png"/>
+
+172.16.0. не 1, а 2, т.е 172.16.0.2 - адрес файлового сервера.
+
+```
+mount –a
+df –h
+```
+
+Проверка, пробуем создать файл: 
+
+```
+touch /mnt/nfs/TEST
+```
+
+Проверяем наличие файла на сервере:
+
+```
+ls –l  /root/raid5/nfs
+```
+
+
 # Модуль 3 
 
 [назад](#ОГЛАВЛЕНИЕ)
