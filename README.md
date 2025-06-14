@@ -233,6 +233,7 @@ timedatectl set-timezone Europe/Moscow
 
 [назад](#ОГЛАВЛЕНИЕ)
 ### 9. Настройте доменный контроллер Samba на машине HQ-SRV
+
 Перед началом настройки отключаем все мосты, если они есть и лишние интерфейсы.
 
 ```
@@ -326,6 +327,7 @@ acc
 Далее как на фото, не забывая галочки:
 
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425247.jpg"/>
+
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5287485572287425257.jpg"/>
 
 Для создания пользователей: в открывшимся окне разворачиваем au-team.irpo, открываем вкладку users и создаем пользователей. Имена пользователей формата user№.hq
@@ -380,6 +382,7 @@ chmod 777 /root/raid5/nfs
 ```
 
 как на фото:
+
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/Рисунок2.png"/>
 
 Экспортируем файловую систему, указанную выше в /etc/exports
@@ -398,6 +401,7 @@ mkdir /mnt/nfs
 chmod 777 /mnt/nfs
 ```
 Настраиваем автомонтирование общего ресурса через fstab:
+
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/автомонтирование%20через%20fstab.png"/>
 
 172.16.0. не 1, а 2, т.е 172.16.0.2 - адрес файлового сервера.
