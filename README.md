@@ -472,11 +472,35 @@ ansible all –m ping
 
 ### 12. Реализуйте логирование при помощи rsyslog на устройствах HQ-RTR, BR-RTR, BR-SRV:
 
-Сервером сбора логов является HQ-SRV.
+Сервером сбора логов является HQ-SRV. На HQ-SRV:
 
 ```
 nano /etc/rsyslog.d/00_common.conf
 ```
 
 Нужно раскомментировать модули imudp и imtcp чтобы rsyslog мог получать логи с удаленных узлов, и создать шаблон сбора логов с клиентов (мы добавим его в самый низ). Окончательный файл будет выглядеть так:
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/рсислог%20хк-ртр.png"/>
+
+Шаблон в виде текста:
+
+```
+$template RemoteLogs, "/opt/%HOSTNAME%.log"
+*.* ?RemoteLogs
+& ~
+```
+
+```
+systemctl enable --now rsyslog
+```
+
+Настройка клиентов HQ-RTR, BR-RTR, BR-SRV:
+
+Выполняем на всех поочередно действия:
+
+```
+nano /etc/rsyslog.d/00_common.conf
+```
+
+Раскоменчиваем первые 4 модуля, которые начнут собирать логи:
 
