@@ -545,3 +545,40 @@ nano /etc/crontab
 ```
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229673.jpg"/>
+
+### Реализуйте механизм инвентаризации машин HQ-SRV и HQ-CLI через Ansible на BR-SRV
+
+```
+mkdir /etc/ansible/PC_INFO
+cd /etc/ansible/PC_INFO
+nano playbook.yml
+```
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229626.jpg"/>
+
+Текстом:
+
+```
+- name: PC_INFO
+  hosts:
+    - hq-srv
+    - hq-cli
+  tasks:
+  - name: create file and append hostname
+    lineinfile:
+      path: /etc/ansible/PC_INFO/{{ ansible_hostname }}.yml
+      line: "Имя компьютера: {{ ansible_hostname }} \n"
+      create: true
+    delegate_to: 127.0.0.1
+
+  - name: append ip address to file
+    lineinfile:
+      path: /etc/ansible/PC_INFO/{{ ansible_hostname }}.yml
+      line: "IP address: {{ ansible_default_ipv4.address }} \n"
+      create: true
+    delegate_to: 127.0.0.1
+```
+
+```
+ansible-playbook /etc/ansible/PC_INFO/playbook.yml
+```
