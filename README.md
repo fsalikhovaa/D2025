@@ -423,6 +423,48 @@ touch /mnt/nfs/TEST
 ls –l  /root/raid5/nfs
 ```
 
+###  Сконфигурируйте ansible на сервере BR-SRV :
+
+Заходим в файл /etc/ansible/hosts и заносим данные о хостах:
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/инвентарь%20энсибл.png"/>
+
+С помощью следующей команды генерируем ssh-ключ:
+
+```
+ssh-keygen –C “$(whoami)@$(hostname)-$(date –I)”
+```
+
+На всех клиентах Ansible кроме HQ-SRV необходимо в файле /etc/openssh/sshd_conf раскомментировать строку Port 22 и прописать AllowUsers user. Обязательно перезапустить демон, а там где он раннее не был включен включить его --now:
+
+```
+systemctl restart sshd
+```
+
+Далее копируем этот ключ по  ssh на все клиенты, которые должны входить в инвентарь: ssh-copy-id имя_пользователя_из_файла_hosts@ip_адрес_из_того_же_файла
+
+```
+ssh-copy-id sshuser@172.16.0.2 –p 2024
+ssh-copy-id user@172.16.0.3
+ssh-copy-id user@172.16.0.1
+ssh-copy-id user@172.16.5.2
+```
+
+Отправить ping:
+
+```
+ansible all –m ping 
+```
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/pong.png"/>
+
+Чтобы предупреждение не вылезало прописываем:
+
+```
+/etc/ansible/ansible.cfg
+```
+
+<img src="https://github.com/fsalikhovaa/demo2025/blob/main/Рисунок6.png"/>
 
 # Модуль 3 
 
