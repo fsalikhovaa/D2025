@@ -642,3 +642,22 @@ nano playbook.yml
 ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 ```
 
+### 15. Настройте принт-сервер cups на сервере HQ-SRV
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс1.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс2.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс3.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс4.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс5.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс6.png"/>
+
+Клиентом является HQ-CLI:
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс%20клиент1.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/капс%20клиент2.png"/>
