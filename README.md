@@ -695,7 +695,7 @@ docker-compose -f wiki.yml up -d
 echo 172.16.0.2 mediawiki.demo.first mediawiki >> /etc/hosts
 ```
 
-Настройка moodle почему-то на BR-SRV, возможно в день икс что-то поменяется 
+### 17. Настройка moodle почему-то на BR-SRV, возможно в день икс что-то поменяется 
 
 дважды CREATE
 
