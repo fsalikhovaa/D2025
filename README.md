@@ -358,8 +358,8 @@ mkfs.ext4 /dev/md0
 Чтобы данный раздел также монтировался при загрузке системы, добавляем в fstab.
 
 ```
-nano /etc/fstab
 mkdir /root/raid5
+nano /etc/fstab
 
 /dev/md0        /root/raid5 ext4        defaults        0        0
 
