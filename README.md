@@ -694,3 +694,44 @@ docker-compose -f wiki.yml up -d
 ```
 echo 172.16.0.2 mediawiki.demo.first mediawiki >> /etc/hosts
 ```
+
+Настройка moodle почему-то на BR-SRV, возможно в день икс что-то поменяется 
+
+дважды CREATE
+
+```
+mariadb
+CREATE DATABASE moodle;
+CREATE USER 'moodle'@’localhost’ IDENTIFIED BY 'moodle';
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle.* TO 'moodle'@’localhost’;
+nano /var/www/html/moodle/config.php
+```
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/конфиг%20пхп.png"/>
+
+```
+systemctl enable --now httpd2.service
+```
+
+Можно проделать на HQ-CLI:
+
+```
+echo 172.16.6.2 moodle.au-team.irpo moodle >> /etc/hosts
+```
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/вход%20мудл.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл1.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл2.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл3.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл5.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл6.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл7.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл8.png"/>
+
