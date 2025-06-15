@@ -83,6 +83,8 @@ systemctl restart sshd.service
 ```
 nano /etc/net/sysctl.conf
 net.ipv4.ip_forward = 1
+
+systemctl restart network
 ```
 
 Настраиваем GRE через nmtui
