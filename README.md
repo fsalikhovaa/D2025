@@ -661,3 +661,5 @@ ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/капс%20клиент1.png"/>
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/капс%20клиент2.png"/>
+
+Можешь попробовать на HQ-SRV настроить Wiki по адресу localhost:8080
