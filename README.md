@@ -662,4 +662,33 @@ ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/капс%20клиент2.png"/>
 
-Можешь попробовать на HQ-SRV настроить Wiki по адресу localhost:8080
+
+### 16. Можешь попробовать на HQ-SRV настроить Wiki по адресу localhost:8080
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/Снимок%20экрана%202025-06-15%20175753.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/Снимок%20экрана%20.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/Снимок%20экрана%20180043.png"/>
+
+```
+su -
+toor
+cp /home/user/Загрузки/LocalSettings.php ./
+nano ~/wiki.yml
+```
+
+Раскоменчиваем строку в докерфайле.
+
+```
+ctrl-x
+y
+docker-compose -f wiki.yml stop
+docker-compose -f wiki.yml up -d
+```
+
+Можно попробовать на кли, чтобы иметь доступ по доменному имени:
+
+```
+echo 172.16.0.2 mediawiki.demo.first mediawiki >> /etc/hosts
+```
