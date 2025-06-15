@@ -270,7 +270,7 @@ rm -rf /var/cache/samba
 mkdir -p /var/lib/samba/sysvol
 ```
 
-Проверяем есть ли необходимые записи в /etc/resolv.conf. Если нет вносим согласно картинке:
+Проверяем есть ли необходимые записи в /etc/resolv.conf. Если нет вносим согласно картинке, НО!!! без слова HQ-RTR:
 
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/5285432947287127148.jpg"/>
 
