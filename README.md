@@ -466,11 +466,70 @@ ansible all –m ping
 
 <img src="https://github.com/fsalikhovaa/demo2025/blob/main/Рисунок6.png"/>
 
+### 12. Настройте службу сетевого времени на базе сервиса chrony:
+
+В качестве сервера выступает HQ-RTR:
+
+```
+nano /etc/crony.conf
+```
+
+Добавляем следующие строки:
+
+```
+hwtimestamp *
+server 127.0.0.1 iburst prefer
+local stratum 5
+allow 0/0
+```
+И комментирем строку как на фото:
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/хрони.png"/>
+
+```
+systemctl restart chronyd
+
+если не сработает:
+
+reboot
+```
+
+Для проверки:
+
+```
+chronyc sources #показывает адрес сервера сетевой службы для данной машины, для HQ-RTR - localhost
+timedatectl
+chronyc tracking
+
+chronyc clients #все клиенты сервера, обязательная проверка в конце
+```
+
+На клиентах HQ-SRV, HQ-CLI, BR-SRV, BR-RTR: 
+
+```
+nano /etc/crony.conf
+```
+
+Добавляем строку и если есть строка как на фото выше комментируем:
+
+```
+server 172.16.0.1 iburst prefer
+
+systemctl enable --now chronyd
+systemctl restart chronyd
+
+Если не сработает:
+
+reboot
+```
+
+Также на всех клиентах.
+
 # Модуль 3 
 
 [назад](#ОГЛАВЛЕНИЕ)
 
-### 12. Реализуйте логирование при помощи rsyslog на устройствах HQ-RTR, BR-RTR, BR-SRV:
+### 13. Реализуйте логирование при помощи rsyslog на устройствах HQ-RTR, BR-RTR, BR-SRV:
 
 Сервером сбора логов является HQ-SRV. На HQ-SRV:
 
@@ -546,7 +605,7 @@ nano /etc/crontab
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/5357130940893229673.jpg"/>
 
-### 13. Реализуйте механизм инвентаризации машин HQ-SRV и HQ-CLI через Ansible на BR-SRV
+### 14. Реализуйте механизм инвентаризации машин HQ-SRV и HQ-CLI через Ansible на BR-SRV
 
 ```
 mkdir /etc/ansible/PC_INFO
@@ -582,4 +641,4 @@ nano playbook.yml
 ```
 ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 ```
-# Добавить хрони
+
