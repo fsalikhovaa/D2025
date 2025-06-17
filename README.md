@@ -661,6 +661,7 @@ ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 
 ```
 systemctl disable --now ahttpd
+systemctl disable --now alteratord
 systemctl restart docker
 docker start db
 docker start wiki
