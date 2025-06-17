@@ -736,3 +736,10 @@ echo 172.16.6.2 moodle.au-team.irpo moodle >> /etc/hosts
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/мудл8.png"/>
 
+### ZABBIX
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/нагрузка%20на%20цп.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/объем%20занятой%20физической%20памяти.png"/>
+
+<img src="https://github.com/fsalikhovaa/D2025/blob/main/использование%20ОП.png"/>
