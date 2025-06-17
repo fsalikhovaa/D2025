@@ -659,6 +659,14 @@ ansible-playbook /etc/ansible/PC_INFO/playbook.yml
 
 ### 16. Можешь попробовать на HQ-SRV настроить Wiki по адресу localhost:8080
 
+```
+systemctl disable --now ahttpd
+systemctl restart docker
+docker start db
+docker start wiki
+docker ps
+```
+
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/Снимок%20экрана%202025-06-15%20175753.png"/>
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/Снимок%20экрана%20.png"/>
