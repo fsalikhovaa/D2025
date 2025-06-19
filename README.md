@@ -743,3 +743,8 @@ echo 172.16.6.2 moodle.au-team.irpo moodle >> /etc/hosts
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/объем%20занятой%20физической%20памяти.png"/>
 
 <img src="https://github.com/fsalikhovaa/D2025/blob/main/использование%20ОП.png"/>
+
+nano /etc/php/7.4/apache2-mod_php/php.ini
+
+systemctl start --now httpd2.service
+systemctl enable httpd2.service
